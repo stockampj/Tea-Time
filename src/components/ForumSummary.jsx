@@ -13,11 +13,11 @@ function ForumSummary(props){
     borderRadius: '5px',
     margin: '5px',
     padding: '8px'
-  }
+  };
 
   return(
     <div style={borderStyle}>
-      <Link to={`/forums/${props.forumContent.id}`}><h4>{props.forumContent.name}</h4></Link>
+      <Link to={`/forum/${props.forumContent.id}`}><h4>{props.forumContent.name}</h4></Link>
       <Message content={bestMsg.msgContent}/>
     </div>
   );
