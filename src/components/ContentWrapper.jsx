@@ -12,6 +12,6 @@ function ContentWrapper(props){
 
 ContentWrapper.propTypes = {
   forums: PropTypes.array
-}
+};
 
-export default ContentWrapper
+export default ContentWrapper;
