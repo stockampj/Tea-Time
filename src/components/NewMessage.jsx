@@ -6,10 +6,11 @@ function NewMessage(props) {
   let _message = null;
   let _forumId = null;
   let _type = null;
+  let _messageId = null;
 
   function handleNewMessage(event){
     event.preventDefault();
-    props.onNewPostCreation({message: _message.value, msgType: _type.value, forumId: _forumId.value, id: v4()});
+    props.onNewPostCreation({messageId: _messageId.value, message: _message.value, msgType: _type.value, forumId: _forumId.value, id: v4()});
     _message.value = '';
   }
   return (
@@ -32,7 +33,12 @@ function NewMessage(props) {
           ref={(input) => {_forumId = input;}}
           readOnly
           hidden />
-
+        <input
+          type='text'
+          value={props.messageId}
+          ref={(input) => {_messageId = input;}} 
+          readOnly
+          hidden />
         <button type='submit'>post</button>
       </form>
     </div>
@@ -42,7 +48,8 @@ function NewMessage(props) {
 NewMessage.propTypes = {
   onNewPostCreation: PropTypes.func,
   msgType: PropTypes.string,
-  forumId: PropTypes.string
+  forumId: PropTypes.string,
+  messageId: PropTypes.string
 };
 
 export default NewMessage;

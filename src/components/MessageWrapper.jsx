@@ -17,6 +17,9 @@ function MessageWrapper(props){
       <div className="comments">
         <CommentList
           commentList = {props.postContent.comments}
+          forumId = {props.forumId}
+          postId = {props.postContent.id}
+          onNewCommentCreation = {props.onNewPostCreation}
         />
       </div>
     </div>

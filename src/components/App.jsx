@@ -89,15 +89,23 @@ class App extends React.Component {
   handleAddingNewPosttoForum(newMessage){
     const forum = this.state.data.find((forum) => forum.id === newMessage.forumId);
     const type = newMessage.msgType;
+    const updatedData = this.state.data.filter((forum) => forum.id !== newMessage.forumId);
     if(type === 'post'){
       var postsString = JSON.stringify(forum.posts);
       var newPostsArray = JSON.parse(postsString);
       newPostsArray.push({id: newMessage.id, msgContent: newMessage.message, comments: [], upCount: 0, downCount: 0});
       forum.posts = newPostsArray;
-      const updatedData = this.state.data.filter((forum) => forum.id !== newMessage.forumId);
-      updatedData.push(forum);
-      this.setState({data: updatedData });
     }
+    else {
+      const post = forum.posts.find((post) => post.id === newMessage.messageId);
+      var commentsString = JSON.stringify(post.comments);
+      var newCommentsArray = JSON.parse(commentsString);
+      newCommentsArray.push({id: newMessage.id, msgContent: newMessage.message, upCount: 0, downCount: 0})
+      post.comments = newCommentsArray;
+      console.log(post.comments);
+    }
+    updatedData.push(forum);
+    this.setState({data: updatedData });
   }
 
   render(){

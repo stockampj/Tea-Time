@@ -14,13 +14,16 @@ function CommentList(props){
         /> 
 
       )}
-      <NewMessage />
+      <NewMessage onNewPostCreation={props.onNewCommentCreation} msgType='comment' forumId={props.forumId} messageId={props.postId}/>
     </div>
   );
 }
 
 CommentList.propTypes = {
-  commentList: PropTypes.array
+  commentList: PropTypes.array,
+  forumId: PropTypes.string,
+  postId: PropTypes.string,
+  onNewCommentCreation: PropTypes.func
 };
 
 export default CommentList;
