@@ -39,7 +39,7 @@ function NewMessage(props) {
           ref={(input) => {_messageId = input;}} 
           readOnly
           hidden />
-        <button type='submit'>post</button>
+        <button type='submit'>{props.msgType}</button>
       </form>
     </div>
   );

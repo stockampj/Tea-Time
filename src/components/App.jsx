@@ -8,6 +8,7 @@ class App extends React.Component {
   constructor(props){
     super(props);
     this.handleAddingNewPosttoForum = this.handleAddingNewPosttoForum.bind(this);
+    this.handleVote = this.handleVote.bind(this);
     this.state = { 
       data: [
         {
@@ -108,13 +109,34 @@ class App extends React.Component {
     this.setState({data: updatedData });
   }
 
+  handleVote(vote){
+    const forum = this.state.data.find((forum) => forum.id === vote.forumId);
+    const post = forum.posts.find((post) => post.id === vote.messageId);
+    const type = vote.voteType;
+    const updatedData = this.state.data.filter((forum) => forum.id !== newMessage.forumId);
+    let voteItem = post;
+
+    if(type !== 'post'){
+      const comment = post.comments.find((comment) => comment.id === vote.commentId);
+      voteItem = comment;
+    }
+
+    if(vote.value === 'up'){
+      voteItem.upCount++;
+    } else {
+      voteItem.downCount++;
+    }
+    updatedData.push(forum);
+    this.setState({data: updatedData });
+  }
+
   render(){
     return(
       <div>
         <Header/>
         <Switch>
           <Route exact path='/' render={()=><ContentWrapper forums={this.state.data} /> } />
-          <Route exact path='/forum/:id' render={()=><ForumPage forums={this.state.data} onNewPostCreation={this.handleAddingNewPosttoForum}/> } />
+          <Route exact path='/forum/:id' render={()=><ForumPage forums={this.state.data} onNewPostCreation={this.handleAddingNewPosttoForum} onVote={this.handleVote}/> } />
         </Switch>
       </div>
     );

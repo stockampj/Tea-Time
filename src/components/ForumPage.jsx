@@ -17,7 +17,7 @@ class ForumPage extends React.Component {
     return(
       <div>
         <h2>{forum.name}</h2>
-        {forum.posts.map((post)=> <MessageWrapper key={post.id} postContent={post} onNewPostCreation={this.props.onNewPostCreation} forumId={match.params.id}/>)}
+        {forum.posts.map((post)=> <MessageWrapper key={post.id} postContent={post} onNewPostCreation={this.props.onNewPostCreation} forumId={match.params.id} onVote={this.props.onVote}/>)}
         <NewMessage onNewPostCreation={this.props.onNewPostCreation} msgType='post' forumId={forum.id}/>
       </div>
     );  
@@ -28,7 +28,8 @@ ForumPage.propTypes = {
   match: PropTypes.object.isRequired,
   location: PropTypes.object.isRequired,
   history: PropTypes.object.isRequired,
-  onNewPostCreation: PropTypes.func
+  onNewPostCreation: PropTypes.func,
+  onVote: PropTypes.func
 }; 
 
 const ForumPageWithRouter = withRouter(ForumPage);

@@ -12,6 +12,7 @@ function MessageWrapper(props){
         content = {props.postContent.msgContent}
         upCount= {props.postContent.upCount}
         downCount= {props.postContent.downCount}
+        onVote={props.onVote}
       />
       <button>Show Comments</button>
       <div className="comments">
@@ -20,6 +21,7 @@ function MessageWrapper(props){
           forumId = {props.forumId}
           postId = {props.postContent.id}
           onNewCommentCreation = {props.onNewPostCreation}
+          onVote = {props.onVote}
         />
       </div>
     </div>
@@ -29,7 +31,8 @@ function MessageWrapper(props){
 MessageWrapper.propTypes = {
   postContent: PropTypes.object,
   onNewPostCreation: PropTypes.func,
-  forumId: PropTypes.string
+  forumId: PropTypes.string,
+  onVote: PropTypes.func
 };
 
 export default MessageWrapper;
